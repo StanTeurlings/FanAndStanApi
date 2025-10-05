@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+}
+
+enum category {
+  ACTIVE
+  MUSIC
+  ART
+  TRAVEL
+  FOOD
+  MOVIE
+  OTHER
+}
+
+model Event {
+  id          Int       @id @default(autoincrement())
+  picture     String
+  title       String
+  category    category
+  description String
+  uploadedAt  DateTime  @default(now())
+  completedAt DateTime?
+  status      Status    @default(PENDING)
+}
